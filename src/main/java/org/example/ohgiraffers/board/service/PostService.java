@@ -4,11 +4,11 @@ package org.example.ohgiraffers.board.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.example.ohgiraffers.board.domain.dto.CreatePostRequest;
-import org.example.ohgiraffers.board.domain.dto.CreatePostResponse;
-import org.example.ohgiraffers.board.domain.dto.ReadPostResponse;
+import org.example.ohgiraffers.board.domain.dto.*;
 import org.example.ohgiraffers.board.domain.entity.Post;
 import org.example.ohgiraffers.board.repository.PostRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,4 +59,38 @@ public class PostService {
         return new ReadPostResponse(foundPost.getPostId(), foundPost.getTitle(), foundPost.getContent());
     }
 
+    @Transactional
+    public UpdatePostResponse updatePost(Long postId, UpdatePostRequest request) {
+
+        Post foundPost = postRepository.findById(postId)
+                .orElseThrow(() -> new EntityNotFoundException("해당 postId로 조회된 게시글이 없습니다."));
+
+
+        //Dirty Checking
+        foundPost.update(request.getTitle(), request.getContent());
+
+        return new UpdatePostResponse(foundPost.getPostId(), foundPost.getTitle(), foundPost.getContent());
+
+    }
+
+    @Transactional
+    public DeletePostResponse deletePost(Long postId) {
+
+
+            Post foundPost = postRepository.findById(postId)
+                    .orElseThrow(() -> new EntityNotFoundException("해당 postId로 조회된 게시글이 없습니다."));
+
+        postRepository.delete(foundPost);
+
+        return new DeletePostResponse(foundPost.getPostId());
+        }
+
+    public Page<ReadPostResponse> readAllPost(Pageable pageable) {
+
+        Page<Post> postsPage = postRepository.findAll(pageable);
+
+        return postsPage.map(post -> new ReadPostResponse(post.getPostId(), post.getTitle(), post.getContent()));
+    }
 }
+
+

@@ -37,6 +37,11 @@ public class Post {
     private String title;
     private String content;
 
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
 }
 
 
