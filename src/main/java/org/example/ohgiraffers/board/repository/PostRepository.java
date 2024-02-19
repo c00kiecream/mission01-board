@@ -1,4 +1,7 @@
 package org.example.ohgiraffers.board.repository;
 
-public interface PostRepository {
+import org.example.ohgiraffers.board.domain.entity.Post;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PostRepository extends JpaRepository<Post, Long> {
 }
