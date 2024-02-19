@@ -1,6 +1,8 @@
 package org.example.ohgiraffers.board.controller;
 
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.ohgiraffers.board.domain.dto.*;
 import org.example.ohgiraffers.board.service.PostService;
@@ -30,6 +32,7 @@ import org.springframework.web.bind.annotation.*;
  * 웹의 장점을 최대한 활용 할 수 있는 아키텍쳐 스타일이다.
  */
 
+@Tag(name = "posts", description = "게시글 API")
 @Controller
 @RestController
 // @RequestMapping: 특정 URL을 매핑하게 도와준다.
@@ -41,6 +44,7 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping
+    @Operation(summary = "✏✏✏게시글 작성✒✒✒", description = "제목(title), 내용(content) 입력하기")
     public ResponseEntity<CreatePostResponse> postCreate(@RequestBody CreatePostRequest request) {
 
         CreatePostResponse response = postService.createPost(request);
@@ -49,6 +53,7 @@ public class PostController {
     }
 
     @GetMapping("/{postID}")
+    @Operation(summary = "▶▶▶게시글 불러오기◀◀◀", description = "제목(title), 내용(content) 보기")
     public ResponseEntity<ReadPostResponse> postRead(@PathVariable Long postID) {
 
         ReadPostResponse response = postService.readPostById(postID);
@@ -57,6 +62,7 @@ public class PostController {
     }
 
     @PutMapping("/{postId}")
+    @Operation(summary = "🛠🛠🛠게시글 수정🛠🛠🛠", description = "제목(title), 내용(content) 수정하기")
     public ResponseEntity<UpdatePostResponse> postUpdate(@PathVariable Long postId, @RequestBody UpdatePostRequest request) {
 
         UpdatePostResponse response = postService.updatePost(postId, request);
@@ -65,6 +71,7 @@ public class PostController {
     }
 
     @DeleteMapping("/{postId}")
+    @Operation(summary = "❌❌❌게시글 삭제❌❌❌", description = "제목(title), 내용(content) 삭제하기")
     public ResponseEntity<DeletePostResponse> postDelete(@PathVariable long postId) {
 
         DeletePostResponse response = postService.deletePost(postId);
@@ -73,6 +80,7 @@ public class PostController {
     }
 
     @GetMapping
+    @Operation(summary = "🔍🔍🔍게시글 페이지 조회👀👀👀", description = "페이지별 제목(title), 내용(content) 조회하기")
     public ResponseEntity<Page<ReadPostResponse>> postReadAll(
             @PageableDefault(size = 5, sort = "postId", direction = Sort.Direction.DESC) Pageable pageable) {
 
