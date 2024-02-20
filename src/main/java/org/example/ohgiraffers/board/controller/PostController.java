@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
  *
  * REST란?
  * Representational AState Transfer의 약자
- * 자원을 이름으로 구분하여 자원의 상태를 주고 받는 것을 의마한다.
+ * 자원을 이름으로 구분하여 자원의 상태를 주고 받는 것을 의미한다.
  * REST는 기본적으로 웹의 기준 기술과 HTTP 프로토콜을 그대로 사용하기 때문에,
  * 웹의 장점을 최대한 활용 할 수 있는 아키텍쳐 스타일이다.
  */
