@@ -22,7 +22,7 @@ on:
        cache: 'gradle'
 
     -name: Add permission for gradlew
-     run: chmod +x gradlew
+    run: chmod +x gradlew
 
      -name: Build with Gradle
        uses: gradle/gradle-build-action@v2
