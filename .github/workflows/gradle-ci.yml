@@ -14,14 +14,17 @@ on:
       -name: Checkout
       uses: actions/checkout@v4
       
-      -name: Set up JDK 17
-      uses: actions/setup-java@4
-      with
-        java-version: '17'
-        disttribution: 'temurin'
-        cache: 'gradle'
+    -name: Set up JDK 17
+    uses: actions/setup-java@4
+    with:
+       java-version: '17'
+       disttribution: 'temurin'
+       cache: 'gradle'
 
-       -name: Build with Gradle
+    -name: Add permission for gradlew
+     run: chmod +x gradlew
+
+     -name: Build with Gradle
        uses: gradle/gradle-build-action@v2
        with:
          arguments: build -x test
