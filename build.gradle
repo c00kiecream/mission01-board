@@ -47,6 +47,14 @@ dependencies {
 
 }
 
+tasks.register('copyPrivate') { Task it ->
+    copy {
+        from './mission-board'
+        include "application.yml"
+        into 'src/main/resources'
+    }
+}
+
 tasks.named('bootBuildImage') {
     builder = 'paketobuildpacks/builder-jammy-base:latest'
 }
