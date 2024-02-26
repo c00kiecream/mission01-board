@@ -1,3 +1,4 @@
-[submodule "mission-board"]
-	path = mission-board
-	url = https://github.com/c00kiecream/mission-board.git
+
+[submodule "Mission01-Board-config"]
+	path = Mission01-Board-config
+	url = https://github.com/c00kiecream/Mission01-Board-config.git

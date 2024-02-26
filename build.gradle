@@ -49,7 +49,7 @@ dependencies {
 
 tasks.register('copyPrivate') { Task it ->
     copy {
-        from './mission-board'
+        from './Mission01-Board-config'
         include "application.yml"
         into 'src/main/resources'
     }
